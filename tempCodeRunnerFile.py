@@ -1,18 +1,42 @@
-#Step 1 
-import random
+def add(n1, n2):
+  return n1 + n2
 
-word_list = ["aardvark", "baboon", "camel"]
+def subtract(n1, n2):
+  return n1 - n2
 
-#TODO-1 - Randomly choose a word from the word_list and assign it to a variable called chosen_word.
-chosen_word=random.choice(word_list)
+def multiply(n1, n2):
+  return n1 * n2
 
-#TODO-2 - Ask the user to guess a letter and assign their answer to a variable called guess. Make guess lowercase.
+def divide(n1, n2):
+  return n1 / n2
 
-guess=input("Please enter a letter").lower()
-#TODO-3 - Check if the letter the user guessed (guess) is one of the letters in the chosen_word.
+operations = {
+  "+": add,
+  "-": subtract,
+  "*": multiply,
+  "/": divide
+}
 
-for letter in word_list:
-    if guess==word_list:
-        print("true")
+def calculator():
+  print(logo)
+
+  num1 = float(input("+"))
+  for symbol in operations:
+    print(symbol)
+  should_continue = True
+ 
+  while should_continue:
+    operation_symbol = input("Pick an operation: ")
+    num2 = float(input("What's the next number?: "))
+    calculation_function = operations[operation_symbol]
+    answer = calculation_function(num1, num2)
+    print(f"{num1} {operation_symbol} {num2} = {answer}")
+
+    if input(f"Type 'y' to continue calculating with {answer}, or type 'n' to start a new calculation: ") == 'y':
+      num1 = answer
     else:
-        print("false")    
+      should_continue = False
+      clear()
+      calculator()
+
+calculator()
